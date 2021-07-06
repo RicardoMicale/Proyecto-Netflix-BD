@@ -2,21 +2,21 @@
   <div class="container">
     <h3>Agregar Contenido: </h3>
     <form @submit.prevent="agregar()">
-      <label>Nombre: </label><input v-model="nombre"><br>
-      <label>Ano de lanzamiento: </label><input v-model="ano"><br>
-      <label>Contenido original: </label><input type="checkbox" v-model="original"><br>
-      <input type="radio" id="yes" :value="true" v-model="pelicula">
+      <input placeholder="Nombre" v-model="nombre"><br>
+      <input placeholder="Estreno (año)" v-model="ano"><br>
+      <label >Original de Netflix: <input class="radio" type="checkbox" v-model="original"></label><br>
+      <input class="radio" type="radio" id="yes" :value="true" v-model="pelicula">
       <label for="yes">Pelicula</label>
       <br>
-      <input type="radio" id="no" :value="false" v-model="pelicula">
+      <input class="radio" type="radio" id="no" :value="false" v-model="pelicula">
       <label for="no">Serie</label>
       <div v-if="pelicula == true">
-        <label>Duracion(minutos): </label><input type="number" v-model="duracion"><br>
-        <label>Ganadora de premios: </label><input type="checkbox" v-model="ganadora"><br>
-        <label>Sinopsis: </label><input v-model="sinopsis"><br>
+        <input placeholder="Duracion (min)" type="number" v-model="duracion"><br>
+        <label >Ganadora de Premio: <input type="checkbox" v-model="ganadora"></label><br>
+        <input placeholder="Sinopsis" v-model="sinopsis"><br>
       </div>
       <div v-if="pelicula == false">
-        <label>Descripcion: </label><input v-model="serieDes"><br>
+        <input placeholder="Descripcion" v-model="serieDes"><br>
       </div>
       <button @submit="agregar()">Mandar</button>
     </form>
@@ -24,10 +24,11 @@
     <h3>Agregar Temporada: </h3>
     <form @submit.prevent="agregarTemp()">
         <select name="series" id="" v-model="serie">
+            <option value="" disabled selected>Serie</option>
             <option :value="serie.id_serie" v-for="serie in listaSeries" :key="serie.id">{{serie.nombre}}</option>
         </select><br>
-        <label>Numero Temporada: </label><input type="number" v-model="numeroTemp"><br>
-        <label>Numero de Capitulos: </label><input type="number" v-model="capitulos"><br>
+        <input placeholder="Numero de Temporada" type="number" v-model="numeroTemp"><br>
+        <input placeholder="Numero de Capitulos" type="number" v-model="capitulos"><br>
         <button @submit="agregarTemp()">Mandar</button>
     </form>
     <hr>
@@ -36,19 +37,21 @@
         <select name="temporadas" id="" v-model="temporada">
             <option :value="temporada.id_temporada" v-for="temporada in listaTemporadas" :key="temporada.id_temporada">{{temporada.nombre}} - Temporada {{temporada.numero}}</option>
         </select><br>
-        <label>Nombre Episodio: </label><input v-model="nombreEp"><br>
-        <label>Numero del episodio: </label><input type="number" v-model="numberEp"><br>
-        <label>Descripcion: </label><input v-model="descEp"><br>
+        <input placeholder="Nombre del Episodio" v-model="nombreEp"><br>
+        <input placeholder="Numero del Episodio" type="number" v-model="numberEp"><br>
+        <input placeholder="Descripcion" v-model="descEp"><br>
         <button @submit="agregarEpisodio()">Mandar</button>
     </form>
     <hr>
     <h3>Agregar Genero: </h3>
     <form @submit.prevent="agregarGenero()">
         <select name="contenido" id="" v-model="contenidoId">
+          <option value="" disabled selected>Contenido</option>
             <option :value="contenido.id" v-for="contenido in listaContenidos" :key="contenido.id">{{contenido.nombre}}</option>
         </select><br>
         <p> tiene: </p>
         <select name="generos" id="" v-model="genero">
+          <option value="" disabled selected>Genero</option>
             <option :value="genero.id_genero" v-for="genero in listaGeneros" :key="genero.id_genero">{{genero.nombre}}</option>
         </select><br>
         <button @submit="agregarGenero()">Mandar</button>
@@ -70,18 +73,18 @@
         original: false,
         pelicula: true,
         serieDes: '',
-        duracion: 0,
+        duracion: '',
         ganadora: false,
         sinopsis: '',
         serie: '',
-        numeroTemp: 0,
-        capitulos: 0,
+        numeroTemp: '',
+        capitulos: '',
         nombreEp: '',
-        numberEp: 0,
+        numberEp: '',
         temporada: 0,
         descEp: '',
-        contenidoId: 0,
-        genero: 0
+        contenidoId: '',
+        genero: ''
 
 
       }
@@ -125,5 +128,24 @@
 </script>
 
 <style>
-
+      input[type=radio], input[type=checkbox] {
+         appearance: none;
+         -webkit-appearance: none;
+         -moz-appearance: none;
+         padding: 2.5px;
+         background-color: rgba(128, 128, 128, .25);
+         border-radius:50%;
+         margin: 3vh 1vw -2.5px 1vw ;
+         border: 3px solid rgba(128, 128, 128, .25);
+         box-shadow: 0 0  0 3px #b82020;
+      }
+      input[type=radio]:checked , input[type=checkbox]:checked{
+         background-color: #b82020;
+      }
+      input[type=radio]:hover, input[type=checkbox]:hover {
+         cursor: pointer;
+      }
+      input[type=checkbox]{
+        border-radius: 0;
+      }
 </style>
