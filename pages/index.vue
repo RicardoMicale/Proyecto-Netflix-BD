@@ -52,7 +52,6 @@
     color: whitesmoke;
     word-spacing: 5px;
     padding-bottom: 15px;
-    margin-top: -4vh;
   }
 }
 

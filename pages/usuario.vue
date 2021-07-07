@@ -2,29 +2,37 @@
   <div class="container">
     <h3>Agregar Usuario: </h3>
     <form @submit.prevent="agregarUsuario()">
-      <label>Usuario: </label><input v-model="usuario"><br>
-      <label>Nombre: </label><input v-model="nombreUser"><br>
-      <label>Apellido: </label><input v-model="apellidoUser"><br>
-      <label>Email: </label><input type="email" v-model="email"><br>
-      <label>Contrasena: </label><input type="password" v-model="password"><br>
-      <label>Edad: </label><input type="number" v-model="edad"><br>
-      <label>Sexo(M, F, N/A): </label><input v-model="sexo"><br>
+      <input placeholder="Usuario" v-model="usuario"><br>
+      <input placeholder="Nombre"  v-model="nombreUser"><br>
+      <input placeholder="Apellido"  v-model="apellidoUser"><br>
+      <input placeholder="Email"  type="email" v-model="email"><br>
+      <input placeholder="Clave"  type="password" v-model="password"><br>
+      <input placeholder="Edad"  type="number" v-model="edad"><br>  
+      <select name="sexos" id="" v-model="sexo">
+        <option value="" disabled selected>Sexo</option>
+        <option value="M">Masculino</option>
+        <option value="F">Femenino</option>
+        <option value="N/A" selected>Sin definir</option>
+      </select><br>
       <select name="paises" id="" v-model="idPais">
+        <option value="" disabled selected>Pais</option>
         <option :value="pais.id_pais" v-for="pais in listaPaises" :key="pais.id_pais">{{pais.nombre}}</option>
       </select>
       <select name="ciudad" id="" v-model="idCiudad">
+        <option value="" disabled selected>Ciudad</option>
         <option :value="ciudad.id_ciudad" v-for="ciudad in listaCiudades" :key="ciudad.id_ciudad" v-show="idPais == ciudad.id_pais">{{ciudad.nombre}}</option>
-      </select>
-      <button @submit="agregarUsuario()">Mandar</button><br>
+      </select><br>
+      <button @submit="agregarUsuario()">Mandar</button><br> 
     </form>
     <hr>
+    <h3>Agregar Perfil: </h3>
     <form @submit.prevent="agregarPerfil()">
-      <h3>Agregar Perfil: </h3>
-      <p>Nombre perfil: </p><input v-model="perfil">
-      <p>pertenece a: </p>
-      <select name="usuarios" id="" v-model="idUsuario">
-        <option :value="usuario.id_usuario" v-for="usuario in listaUsuarios" :key="usuario.id_usuario">{{usuario.nombre_usuario}}</option>
-      </select>
+      <input placeholder="Perfil" v-model="perfil"><br>
+      <p>pertenece a: </p> 
+        <select name="usuarios" id="" v-model="idUsuario">
+          <option value="" disabled selected>Usuario</option>
+          <option :value="usuario.id_usuario" v-for="usuario in listaUsuarios" :key="usuario.id_usuario">{{usuario.nombre_usuario}}</option>
+        </select><br>
       <button @submit="agregarPerfil()">Mandar</button>
     </form>
   </div>
@@ -72,5 +80,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

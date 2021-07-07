@@ -2,19 +2,20 @@
   <div class="container">
     <h3>Agregar Pais: </h3>
     <form @submit.prevent="agregarPais()">
-      <label>Nombre: </label><input v-model="nombrePais"><br>
-      <label>Descripcion: </label><input v-model="descPais"><br>
+      <input placeholder="Pais" v-model="nombrePais"><br>
+      <input placeholder="Descripcion" v-model="descPais"><br>
       <button @submit="agregarPais()">Mandar</button><br>
     </form>
     <hr>
     <h3>Agregar Ciudad: </h3>
     <form @submit.prevent="agregarCiudad()">
-      <label>Nombre Ciudad: </label><input v-model="nombreCiu"><br>
-      <label>Poblacion: </label><input v-model="poblacion"><br>
-      <p>pertence a: </p>
+      <input placeholder="Ciudad" v-model="nombreCiu"><br>
+      <input placeholder="Poblacion" v-model="poblacion"><br>
+      <p>pertence a:</p>
       <select name="paises" id="" v-model="idPais">
+        <option value="" disabled selected>Pais</option>
         <option :value="pais.id_pais" v-for="pais in listaPaises" :key="pais.id_pais">{{pais.nombre}}</option>
-      </select>
+      </select><br>
       <button @submit="actua()">Mandar</button>
     </form>
   </div>

@@ -3,39 +3,48 @@
     <h3>Contrata: </h3>
     <form @submit.prevent="contrata()">
       <select name="usuarios" id="" v-model="idUsuario">
+        <option value="" disabled selected>Usuario</option>
         <option :value="usuario.id_usuario" v-for="usuario in listaUsuarios" :key="usuario.id_usuario">{{usuario.nombre_usuario}}</option>
       </select>
-      <p>contrata: </p>
+      <p>contrata</p>
       <select name="suscripciones" id="" v-model="idSus">
+        <option value="" disabled selected>suscripcion</option>
         <option :value="sus.id_suscripcion" v-for="sus in listaSus" :key="sus.id_suscripcion">{{sus.nombre}}</option>
       </select>
-      <p>empezando en: </p>
-      <label>Fecha Inicio: </label><input type="date" v-model="fechaInicio"><br>
+      <p>empezando en </p>
+        <input placeholder="fecha" type="date" v-model="fechaInicio"><br>
       <button @submit="contrata()">Mandar</button>
     </form>
     <hr>
     <h3>Terminar contrato: </h3>
     <form @submit.prevent="finalizar()">
         <select name="usuarios" id="" v-model="idUsuarioFin">
+          <option value="" disabled selected>Usuario</option>
          <option :value="usuario.id_usuario" v-for="usuario in listaUsuarios" :key="usuario.id_usuario">{{usuario.nombre_usuario}}</option>
-        </select><br>
+        </select>
+        <p>termina </p>
         <select name="contratos" id="">
+         <option value="" disabled selected>suscripcion</option>
          <option :value="contrato.id_usuario" v-for="contrato in listaContratos" :key="contrato.id_usuario" v-show="idUsuarioFin == contrato.id_usuario && contrato.fecha_inicio != null && contrato.fecha_fin == null">{{contrato.fecha_inicio}}</option>
         </select><br>
-        <label>Fecha Fin: </label><input type="date" v-model="fechaFin"><br>
+        <p>en </p>
+        <input placeholder="fecha" type="date" v-model="fechaFin"><br>
         <button @submit="finalizar()">Mandar</button>
     </form>
     <hr>
     <h3>Recomendar: </h3>
     <form @submit.prevent="recomendar()">
         <select name="usuarios" id="" v-model="idUsuarioRec">
+         <option value="" disabled selected>Usuario</option>
          <option :value="usuario.id_usuario" v-for="usuario in listaUsuarios" :key="usuario.id_usuario">{{usuario.nombre_usuario}}</option>
         </select><br>
         <select name="perfiles" id="" v-model="idPerfilRec">
+         <option value="" disabled selected>Perfil</option>
          <option :value="perfil.id_perfil" v-for="perfil in listaPerfiles" :key="perfil.id_perfil" v-show="idUsuarioRec == perfil.id_usuario">{{perfil.nombre}}</option>
         </select><br>
         <p>Recomendar: </p>
         <select name="peliculas" id="" v-model="idPeliculaRec">
+         <option value="" disabled selected>Pelicula</option>
          <option :value="pelicula.id_pelicula" v-for="pelicula in listaPeliculas" :key="pelicula.id_pelicula">{{pelicula.nombre}}</option>
         </select><br>
         <button @submit="recomendar()">Mandar</button>
@@ -44,41 +53,49 @@
     <h3>Agregar requerimiento: </h3>
     <form @submit.prevent="requiere()">
         <select name="contenido" id="" v-model="contenidoIdReq">
+            <option value="" disabled selected>Contenido</option>
             <option :value="contenido.id" v-for="contenido in listaContenidos" :key="contenido.id">{{contenido.nombre}}</option>
         </select><br>
         <p> requiere: </p>
         <select name="suscripciones" id="" v-model="idSusReq">
+            <option value="" disabled selected>suscripcion</option>
             <option :value="sus.id_suscripcion" v-for="sus in listaSus" :key="sus.id_suscripcion">{{sus.nombre}}</option>
-        </select>
+        </select><br>
         <button @submit="requiere()">Mandar</button>
     </form>
     <hr>
     <h3>Visualiza: </h3>
     <form @submit.prevent="visualiza()">
         <select name="usuarios" id="" v-model="idUsuarioVis">
+         <option value="" disabled selected>Usuario</option>
          <option :value="usuario.id_usuario" v-for="usuario in listaUsuarios" :key="usuario.id_usuario">{{usuario.nombre_usuario}}</option>
         </select><br>
         <select name="perfiles" id="" v-model="idPerfilVis">
+         <option value="" disabled selected>Perfil</option>
          <option :value="perfil.id_perfil" v-for="perfil in listaPerfiles" :key="perfil.id_perfil" v-show="idUsuarioVis == perfil.id_usuario">{{perfil.nombre}}</option>
         </select><br>
         <input type="radio" id="yes" :value="true" v-model="pelicula">
-        <label for="yes">Pelicula</label>
+        <label for="yes">Pelicula</label><br>
         <select name="peliculas" id="" v-model="idPeliculaVis" v-if="pelicula">
+          <option value="" disabled selected>Peliculas</option>
          <option :value="pelicula.id_pelicula" v-for="pelicula in listaPeliculas" :key="pelicula.id_pelicula">{{pelicula.nombre}}</option>
         </select>
         <br>
         <input type="radio" id="no" :value="false" v-model="pelicula">
         <label for="no">Episodio</label><br>
         <select name="series" id="" v-model="serieId" v-if="!pelicula">
+            <option value="" disabled selected>Serie</option>
             <option :value="serie.id_serie" v-for="serie in listaSeries" :key="serie.id">{{serie.nombre}}</option>
         </select><br>
         <select name="temporadas" id="" v-model="temporadaId" v-if="!pelicula">
+            <option value="" disabled selected>Temporada</option>
             <option :value="temporada.id_temporada" v-for="temporada in listaTemporadas" :key="temporada.id_temporada" v-show="serieId == temporada.id_serie">{{temporada.nombre}} - Temporada {{temporada.numero}}</option>
         </select><br>
         <select name="episodios" id="" v-model="episodioId" v-if="!pelicula">
+          <option value="" disabled selected>Episodio</option>
          <option :value="episodio.id_episodio" v-for="episodio in listaEpisodios" :key="episodio.id_episodio" v-show="temporadaId == episodio.id_temporada">{{episodio.nombre}}</option>
         </select><br>
-        <label>Calificacion: </label><input type="number" v-model="calificacion"><br>
+        <input placeholder="Calificacion" type="number" v-model="calificacion"><br>
         <button @submit="visualiza()">Mandar</button>
     </form>
   </div>
