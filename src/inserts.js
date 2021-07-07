@@ -2,7 +2,7 @@ const express = require('express');
 const {
   Client
 } = require('pg');
-const connectionString = 'postgres://postgres:jack123@localhost:5432/netflix';
+const connectionString = 'postgres://postgres:ricardo123@localhost:5432/Netflix';
 const client = new Client({
   connectionString: connectionString
 });
@@ -120,7 +120,7 @@ app.get('/', function (req, res, next) {
       break;
     case "usuario":
       client.query(
-        `insert into public.usuario (id_pais, id_ciudad, nombre_usuario, email, contraseña, nombre, apellido, edad, sexo) 
+        `insert into public.usuario (id_pais, id_ciudad, nombre_usuario, email, contraseña, nombre, apellido, edad, sexo)
         values ('${parseInt(req.query.idPais)}','${parseInt(req.query.idCiudad)}', '${req.query.usuario}', '${req.query.email}', '${req.query.password}', '${req.query.nombreUser}', '${req.query.apellidoUser}', '${parseInt(req.query.edad)}', '${req.query.sexo}');`,
         function (err, result) {
           if (err) {
@@ -132,7 +132,7 @@ app.get('/', function (req, res, next) {
       break;
     case "perfil":
       client.query(
-        `insert into public.perfil (id_usuario, nombre) 
+        `insert into public.perfil (id_usuario, nombre)
         values ('${parseInt(req.query.idUsuario)}','${req.query.perfil}');`,
         function (err, result) {
           if (err) {
@@ -144,7 +144,7 @@ app.get('/', function (req, res, next) {
       break;
     case "contrata":
       client.query(
-        `insert into public.contrata (id_usuario, id_suscripcion, fecha_inicio, fecha_fin) 
+        `insert into public.contrata (id_usuario, id_suscripcion, fecha_inicio, fecha_fin)
         values ('${parseInt(req.query.idUsuario)}','${parseInt(req.query.idSus)}', '${req.query.fechaInicio}', null);`,
         function (err, result) {
           if (err) {
@@ -169,7 +169,7 @@ app.get('/', function (req, res, next) {
       break;
     case "recomendar":
       client.query(
-        `insert into public.recomendada (id_usuario, id_perfil, id_pelicula) 
+        `insert into public.recomendada (id_usuario, id_perfil, id_pelicula)
         values ('${parseInt(req.query.idUsuarioRec)}','${parseInt(req.query.idPerfilRec)}', '${parseInt(req.query.idPeliculaRec)}');`,
         function (err, result) {
           if (err) {
@@ -181,7 +181,7 @@ app.get('/', function (req, res, next) {
       break;
     case "requiere":
       client.query(
-        `insert into public.requiere (id_contenido, id_suscripcion) 
+        `insert into public.requiere (id_contenido, id_suscripcion)
         values ('${parseInt(req.query.contenidoIdReq)}','${parseInt(req.query.idSusReq)}');`,
         function (err, result) {
           if (err) {
@@ -193,7 +193,7 @@ app.get('/', function (req, res, next) {
       break;
     case "visualiza":
       client.query(
-        `insert into public.visualiza (id_usuario, id_perfil, id_pelicula, id_episodio, calificacion) 
+        `insert into public.visualiza (id_usuario, id_perfil, id_pelicula, id_episodio, calificacion)
         values ('${parseInt(req.query.idUsuarioVis)}','${parseInt(req.query.idPerfilVis)}','${parseInt(req.query.idPeliculaVis)}','${parseInt(req.query.episodioId)}','${parseInt(req.query.calificacion)}');`,
         function (err, result) {
           if (err) {

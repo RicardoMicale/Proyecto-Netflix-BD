@@ -1,6 +1,6 @@
 const express = require('express');
 const { Client } = require('pg');
-const connectionString = 'postgres://postgres:jack123@localhost:5432/netflix';
+const connectionString = 'postgres://postgres:ricardo123@localhost:5432/Netflix';
 const client = new Client({
     connectionString: connectionString
 });
@@ -21,7 +21,7 @@ app.get('/', function (req, res, next) {
     contenido.nombre, contenido.año_lanzamiento
     HAVING AVG(v.calificacion) > 3
     ORDER BY contenido.año_lanzamiento;
-    
+
     SELECT usuario.nombre_usuario, c.nombre, p.nombre, COUNT(v.id_episodio) FROM usuario
     JOIN pais p on p.id_pais = usuario.id_pais
     JOIN ciudad c on c.id_ciudad = usuario.id_ciudad
@@ -70,7 +70,7 @@ app.get('/', function (req, res, next) {
     ORDER BY AVG(v.calificacion) DESC
     LIMIT 3;
 
-    SELECT nombre, AVG(v.calificacion) FROM contenido
+    SELECT contenido.nombre, AVG(v.calificacion) FROM contenido
     JOIN pelicula p on contenido.id = p.id
     JOIN actua a on contenido.id = a.id
     JOIN visualiza v on p.id_pelicula = v.id_pelicula
@@ -79,7 +79,7 @@ app.get('/', function (req, res, next) {
     WHERE actor.nombre = 'Daniel Brühl')
     GROUP BY contenido.nombre
     HAVING AVG(v.calificacion) > (SELECT AVG(visualiza.calificacion) FROM visualiza WHERE visualiza.id_episodio = 0);
-    
+
     SELECT usuario.nombre_usuario, usuario.nombre, usuario.apellido, usuario.edad, usuario.sexo, usuario.email FROM usuario
     JOIN contrata c on usuario.id_usuario = c.id_usuario
     JOIN visualiza v on usuario.id_usuario = v.id_usuario
@@ -120,11 +120,11 @@ app.get('/', function (req, res, next) {
             console.log(err);
             res.status(400).send(err);
         }
-        let queryA = result[0].rows 
+        let queryA = result[0].rows
         let queryB = result[1].rows
-        let queryC = result[2].rows 
+        let queryC = result[2].rows
         let queryD = result[3].rows
-        let queryE = result[4].rows 
+        let queryE = result[4].rows
         let queryF = result[5].rows
         let queryG = result[6].rows
         let promedio = result[7].rows
